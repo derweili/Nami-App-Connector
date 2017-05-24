@@ -30,33 +30,59 @@ class NamiMember {
     public $status;
     public $young_scout;
     public $member_type;
+    public $bank_info;
+    public $gender;
+    public $nickname;
+    public $date_of_birth;
+    public $nationality_description;
+    public $last_name;
+    public $entry_date;
+    public $leaving_date;
+    public $generic_field_2;
+    public $fax;
+
 
 
 
     public function get_data(){
         return array(
-            "dissolution_date" => $this->dissolution_date,
-            "creditorIdentification" => $this->creditorIdentification,
-            "level" => $this->level,
-            "email" => $this->email,
-            "fax" => $this->fax,
-            "fibu_debitor_konto" => $this->fibu_debitor_konto,
-            "fibu_profit_konto" => $this->fibu_profit_konto,
-            "group_number" => $this->group_number,
-            "founding_date" => $this->founding_date,
+            "first_job" => $this->first_job,
+            "generic_field_1" => $this->generic_field_1,
+            "version" => $this->version,
+            "phone_3" => $this->phone_3,
+            "phone_2" => $this->phone_2,
+            "phone_1" => $this->phone_1,
+            "descriptor" => $this->descriptor,
+            "entry_id" => $this->entry_id,
+            "nationality" => $this->nationality,
+            "rover" => $this->rover,
+            "scout" => $this->scout,
+            "member_number" => $this->member_number,
+            "reuse_flag" => $this->reuse_flag,
+            "first_subdivision_id" => $this->first_subdivision_id,
+            "first_name" => $this->first_name,
             "id" => $this->id,
-            "name" => $this->name,
-            "number" => $this->number,
-            "parent_group_name" => $this->parent_group_name,
-            "parent_group_id" => $this->parent_group_id,
-            "selected_records_ids" => $this->selected_records_ids,
-            "residence" => $this->residence,
-            "contact" => $this->contact,
-            "website" => $this->website,
+            "wolf" => $this->wolf,
+            "contribution_types" => $this->contribution_types,
+            "grade" => $this->grade,
+            "email" => $this->email,
+            "confession" => $this->confession,
+            "legal_representative_email" => $this->legal_representative_email,
+            "fix_contribution" => $this->fix_contribution,
+            "last_updated" => $this->last_updated,
             "status" => $this->status,
-            "status_id" => $this->status_id,
-            "phone" => $this->phone,
-            "members" => $this->members,
+            "young_scout" => $this->young_scout,
+            "member_type" => $this->member_type,
+            "bank_info" => $this->bank_info,
+            "gender" => $this->gender,
+            "nickname" => $this->nickname,
+            "date_of_birth" => $this->date_of_birth,
+            "nationality_description" => $this->nationality_description,
+            "last_name" => $this->last_name,
+            "entry_date" => $this->entry_date,
+            "leaving_date" => $this->leaving_date,
+            "generic_field_2" => $this->generic_field_2,
+            "fax" => $this->fax
 
         );
     }

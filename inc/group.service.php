@@ -15,6 +15,7 @@ class NamiGroupService{
         $this->group->descriptor = $data["descriptor"];
         $this->group->name = $data["name"];
         $this->group->id = $data["id"];
+        $this->group->members = array();
 
     }
 
@@ -41,6 +42,13 @@ class NamiGroupService{
 
     public function get_group(){
         return $this->group->get_data();
+    }
+
+
+    public function add_member( $member ){
+
+        $this->group->members[] = $member;
+
     }
 
 
