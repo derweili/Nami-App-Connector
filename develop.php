@@ -36,8 +36,8 @@ $nami = new NamiConnector(true, 'nami.dpsg.de', $settings_array["cookie_path"]);
 
 $nami->login( array(
 
-    "username"  => $username,
-    "password"  => $password
+    "username"  => '78175',
+    "password"  => 'eggarshill'
 
     )
 );

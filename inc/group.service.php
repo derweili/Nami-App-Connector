@@ -36,7 +36,8 @@ class NamiGroupService{
         $this->group->parent_group_name = $data["parentGruppierung"];
         $this->group->parent_group_id = $data["parentGruppierungId"];
         $this->group->selected_records_ids = $data["selected_records_ids"];
-        $this->group->selected_records_ids = $data["selected_records_ids"];
+        $this->group->founding_date = $data["gruendungsDatum"];
+        $this->group->website = $data["webUrl"];
 
     }
 

@@ -1,5 +1,5 @@
 <?php
-class NamiConnector{ 
+class NamiConnector{
 	private $url;
     private $https;
     private $Login;
@@ -17,7 +17,7 @@ class NamiConnector{
 
 			$this->gid = "070901";
     }
-	
+
 	function call_api($service,$fields = null) {
 
 		if ($this->https == true) 	{
@@ -30,18 +30,18 @@ class NamiConnector{
 
 		// setze die URL und andere Optionen
 		curl_setopt($ch, CURLOPT_URL, $serviceurl);
-		
+
 		if (isset($fields)) {
 			foreach ($fields as $key => $value)
 			{
 			  $post_data[$key] = urlencode($value);
 			}
-			
+
 			//url-ify the data for the POST
 			$fields_string = '';
 			foreach($post_data as $key=>$value) { $fields_string .= $key.'='.$value.'&'; /*echo 'test';*/}
 			rtrim($fields_string,'&');
-		
+
 			curl_setopt($ch, CURLOPT_POST, count($post_data));
 			curl_setopt($ch, CURLOPT_POSTFIELDS,$fields_string);
 		}
@@ -55,14 +55,14 @@ class NamiConnector{
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		
+
 		if ($this->https == true) 	{
 			// These options are for https!!!
 			// Turns off certificate verification --- be carefull!
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 			curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
-			curl_setopt($ch, CURLOPT_PORT , 443); 
+			curl_setopt($ch, CURLOPT_PORT , 443);
 		}
 
 		if(curl_exec($ch) === false)
@@ -82,24 +82,24 @@ class NamiConnector{
 		}
 		//		var_dump($result);
 
-		if (isset($error)) {echo $error; echo 'error';}
+	if (isset($error)) {/*echo $error; echo 'error';*/}
 		else {return($result);}
 
 		// schließe den cURL-Handle und gebe die Systemresourcen frei
 		curl_close($ch);
 	}
-	
+
 	function login($credentials) {
-	
+
 		// preparing the post data
 		$fields = array(
-			'Login'		=>	$this->Login, 
-			'username'	=>	$credentials["username"], 
+			'Login'		=>	$this->Login,
+			'username'	=>	$credentials["username"],
 			'password'	=>	$credentials["password"],
 			'redirectTo'	=>	'app.jsp',
 
 		);
-					
+
 		return $this->call_api("/ica/rest/nami/auth/manual/sessionStartup",$fields);
 	}
 
@@ -108,7 +108,7 @@ class NamiConnector{
 		$this->gid = $group_id;
 
 	}
-	
+
 	function get_groups() {
 		//$result = $this->call_api("/ica/rest/orgadmin/gruppierung/flist?_dc=1353416298860&page=1&start=0&limit=4000");
 		$result = $this->call_api("/ica/rest/nami/gruppierungen/filtered-for-navigation/gruppierung/node/root?_dc=1477418659231&sort=%5B%7B%22property%22%3A%22leaf%22%2C%22direction%22%3A%22ASC%22%7D%5D&node=root");
@@ -119,15 +119,15 @@ class NamiConnector{
 			return $response["data"];
 		}
 	}
-	
-	
+
+
 	function get_groupid() {
 		// Holt die Gruppierungs-ID des Stammes aus der Nami
 		$response = $this->get_groups();
 		$gruppierungen = $response["data"];
-		
+
 		print_r($gruppierungen);
-			
+
 		/*foreach($gruppierungen as $gruppierung) {
 			if (substr_count($gruppierung["descriptor"],"Essen-Stoppenberg, St. Nikolaus") == 1) {
 				return $gruppierung["id"];
@@ -136,7 +136,7 @@ class NamiConnector{
 			}
 		}*/
 	}
-	
+
 	function get_group_info( $group_id ){
 		$result = $this->call_api("/ica/rest/nami/gruppierung-gf-edit/edit?id=" . $group_id . "&_dc=1495545095267");
 		//var_dump($result);
@@ -154,10 +154,10 @@ class NamiConnector{
 		//var_dump($response);
 		if ($response["responseType"] == "EXCEPTION") {echo $response["message"];} else {return $response["data"];}
 	}
-	
+
 	function get_memberdata($name) {
 		$members = $this->get_members();
-			
+
 		foreach ($members as $member) {
 			if (substr_count($member["descriptor"],$name) == 1) {
 				$data = $member["entries"];
@@ -166,7 +166,7 @@ class NamiConnector{
 		}
 	}
 
-	
+
 	function get_detailed_memberdata( $member_id = '' ) {
 		$result = $this->call_api("/ica/rest/nami/mitglied/filtered-for-navigation/gruppierung/gruppierung/". $this->gid ."/" . $member_id );
 		//var_dump($result);
@@ -177,7 +177,7 @@ class NamiConnector{
 
 	function get_membernumber($name) {
 		$data = $this->get_memberdata($name);
-		return $data["mitgliedsNummer"];	
+		return $data["mitgliedsNummer"];
 	}
 }
 ?>
